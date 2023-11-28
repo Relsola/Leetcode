@@ -8,14 +8,14 @@ function isValid(s) {
 	for (let i = 0; i < n; i++) {
 		const c = s[i];
 		switch (c) {
-			case "(":
-				stack.push(")");
+			case '(':
+				stack.push(')');
 				break;
-			case "[":
-				stack.push("]");
+			case '[':
+				stack.push(']');
 				break;
-			case "{":
-				stack.push("}");
+			case '{':
+				stack.push('}');
 				break;
 			default:
 				if (c !== stack.pop()) {
@@ -35,9 +35,9 @@ function isValid(s) {
 function isValid(s) {
 	const stack = [],
 		map = {
-			"(": ")",
-			"[": "]",
-			"{": "}"
+			'(': ')',
+			'[': ']',
+			'{': '}'
 		};
 
 	for (const x of s) {

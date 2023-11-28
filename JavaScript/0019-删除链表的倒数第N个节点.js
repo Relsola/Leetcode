@@ -37,8 +37,7 @@ function removeNthFromEnd(head, n) {
 	if (listSize === n) head = head.next;
 	else {
 		curNode = head;
-		for (let i = 0; i < listSize - n - 1; i++)
-			curNode = curNode.next;
+		for (let i = 0; i < listSize - n - 1; i++) curNode = curNode.next;
 		curNode.next = curNode.next.next;
 	}
 

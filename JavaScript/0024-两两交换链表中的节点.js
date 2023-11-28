@@ -16,8 +16,8 @@ function swapPairs(head) {
 
 	while (temp.next !== null && temp.next.next !== null) {
 		cur = temp.next.next;
-        pre = temp.next;
-        
+		pre = temp.next;
+
 		// 两两交换
 		pre.next = cur.next;
 		cur.next = pre;
