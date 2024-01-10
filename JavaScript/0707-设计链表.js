@@ -9,6 +9,7 @@ class ListNode {
   }
 }
 
+// /** 单链表 */
 function MyLinkedList() {
   this.size = 0;
   this.head = null;
@@ -98,4 +99,104 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
   const node = this.getNode(index - 1);
   node.next = node.next.next;
   index === --this.size && (this.tail = node);
+};
+
+/** 双链表 */
+function MyLinkedList() {
+  this.size = 0;
+  this.head = new ListNode(0, null);
+  this.tail = new ListNode(0, null);
+  this.head.next = this.tail;
+  this.tail.prev = this.head;
+}
+
+/**
+ * @param {number} index
+ * @returns {ListNode|null}
+ */
+MyLinkedList.prototype.getNode = function (index) {
+  if (index < 0 || index >= this.size) {
+    return null;
+  }
+  let cur = this.head;
+  if (index > this.size / 2) {
+    cur = this.tail;
+    while (this.size - index++ > 0) {
+      cur = cur.prev;
+    }
+  } else {
+    while (index-- >= 0) {
+      cur = cur.next;
+    }
+  }
+  return cur;
+};
+
+/**
+ * @param {number} index
+ * @return {number}
+ */
+MyLinkedList.prototype.get = function (index) {
+  return index < 0 || index >= this.size ? -1 : this.getNode(index).val;
+};
+
+/**
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtHead = function (val) {
+  this.addAtIndex(0, val);
+};
+
+/**
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtTail = function (val) {
+  this.addAtIndex(this.size, val);
+};
+
+/**
+ * @param {number} index
+ * @param {number} val
+ * @return {void}
+ */
+MyLinkedList.prototype.addAtIndex = function (index, val) {
+  if (index > this.size) {
+    return;
+  }
+  let prev;
+  if (index <= 0) {
+    prev = this.head;
+  } else if (index >= this.size) {
+    prev = this.tail.prev;
+  } else {
+    prev = this.getNode(index - 1);
+  }
+  this.size++;
+  const node = new ListNode(val, prev.next);
+  node.prev = prev;
+  prev.next = node;
+  node.next.prev = node;
+};
+
+/**
+ * @param {number} index
+ * @return {void}
+ */
+MyLinkedList.prototype.deleteAtIndex = function (index) {
+  if (index < 0 || index >= this.size) {
+    return;
+  }
+  let prev;
+  if (index <= 0) {
+    prev = this.head;
+  } else if (index >= this.size) {
+    prev = this.tail.prev;
+  } else {
+    prev = this.getNode(index - 1);
+  }
+  this.size--;
+  prev.next = prev.next.next;
+  prev.next.prev = prev;
 };
