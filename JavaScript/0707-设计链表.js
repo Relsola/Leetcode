@@ -165,14 +165,7 @@ MyLinkedList.prototype.addAtIndex = function (index, val) {
   if (index > this.size) {
     return;
   }
-  let prev;
-  if (index <= 0) {
-    prev = this.head;
-  } else if (index >= this.size) {
-    prev = this.tail.prev;
-  } else {
-    prev = this.getNode(index - 1);
-  }
+  let prev = index <= 0 ? this.head : this.getNode(index - 1);
   this.size++;
   const node = new ListNode(val, prev.next);
   node.prev = prev;
@@ -188,14 +181,7 @@ MyLinkedList.prototype.deleteAtIndex = function (index) {
   if (index < 0 || index >= this.size) {
     return;
   }
-  let prev;
-  if (index <= 0) {
-    prev = this.head;
-  } else if (index >= this.size) {
-    prev = this.tail.prev;
-  } else {
-    prev = this.getNode(index - 1);
-  }
+  let prev = index === 0 ? this.head : this.getNode(index - 1);
   this.size--;
   prev.next = prev.next.next;
   prev.next.prev = prev;
