@@ -35,6 +35,10 @@ function getIntersectionNode(headA, headB) {
 
 // 一个循环
 function getIntersectionNode(headA, headB) {
+  if (headA === null || headB === null) {
+    return null;
+  }
+
   let p1 = headA,
     p2 = headB;
 
