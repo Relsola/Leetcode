@@ -1,29 +1,24 @@
-// Map结构
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
 function isAnagram(s, t) {
-	if (s.length !== t.length) return false;
-	const char_count = new Map();
+  if (s.length !== t.length) {
+    return false;
+  }
+  const record = new Array(26).fill(0),
+    n = s.length,
+    base = 'a'.charCodeAt();
 
-	for (const item of s)
-		char_count.set(item, (char_count.get(item) ?? 0) + 1);
+  for (let i = 0; i < n; i++) {
+    record[s[i].charCodeAt() - base]++;
+  }
 
-	for (const item of t) {
-		const value = char_count.get(item);
-		if (value === undefined || value === 0) return false;
-		char_count.set(item, value - 1);
-	}
-	return true;
+  for (let i = 0; i < n; i++) {
+    if (--record[t[i].charCodeAt() - base] < 0) {
+      return false;
+    }
+  }
+  return true;
 }
-
-// 数组结构
-function isAnagram(s, t) {
-	if (s.length !== t.length) return false;
-	const helperArr = new Array(26).fill(0);
-	const base = "a".charCodeAt();
-	for (const item of s) helperArr[item.charCodeAt() - base]++;
-	for (const item of t)
-		if (helperArr[item.charCodeAt() - base]-- === 0) return false;
-
-	return true;
-}
-
-console.log(isAnagram("sdd", "dsd"));
