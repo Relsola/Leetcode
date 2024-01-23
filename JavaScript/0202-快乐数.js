@@ -1,31 +1,31 @@
-// Map结构
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
 function isHappy(n) {
-	const map = new Map();
-
-	function getSum(num) {
-		let sum = 0;
-		while (num !== 0) {
-			sum += (num % 10) ** 2;
-			num = (num / 10) >> 0;
-		}
-		return sum;
-	}
-
-	while (n !== 1 && !map.has(n)) {
-		map.set(n, true);
-		n = getSum(n);
-	}
-	return n === 1;
+  const map = new Map();
+  while (true) {
+    if (map.has(n)) {
+      return false;
+    }
+    if (n === 1) {
+      return true;
+    }
+    map.set(n, true);
+    n = getSum(n);
+  }
 }
 
-// Set结构
-function isHappy(n) {
-	const set = new Set();
-	while (n !== 1 && !set.has(n)) {
-		set.add(n);
-		n = String(n)
-			.split("")
-			.reduce((pre, cur) => pre + Number(cur) ** 2, 0);
-	}
-	return n === 1;
+/**
+ * 计算n中每一位的平方和
+ * @param {number} n
+ * @return {number}
+ */
+function getSum(n) {
+  let sum = 0;
+  while (n > 0) {
+    sum += (n % 10) ** 2;
+    n = (n / 10) >> 0;
+  }
+  return sum;
 }
