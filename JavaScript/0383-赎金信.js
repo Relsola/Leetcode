@@ -1,12 +1,24 @@
+/**
+ * @param {string} ransomNote
+ * @param {string} magazine
+ * @return {boolean}
+ */
 function canConstruct(ransomNote, magazine) {
-	const helperArr = new Array(26).fill(0),
-		base = "a".charCodeAt();
-	// 记录 magazine里各个字符出现次数
-	for (const char of magazine) helperArr[char.charCodeAt() - base]++;
+  const rn = ransomNote.length,
+    mn = magazine.length;
+  if (rn > mn) {
+    return false;
+  }
+  const hash = new Array(26).fill(0),
+    base = 'a'.charCodeAt();
 
-	// 对应的字符个数做--操作
-	for (const char of ransomNote)
-		if (!helperArr[char.charCodeAt() - base]--) return false;
-
-	return true;
+  for (let i = 0; i < mn; i++) {
+    hash[magazine[i].charCodeAt() - base]++;
+  }
+  for (let i = 0; i < rn; i++) {
+    if (--hash[ransomNote[i].charCodeAt() - base] < 0) {
+      return false;
+    }
+  }
+  return true;
 }
