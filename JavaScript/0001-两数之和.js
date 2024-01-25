@@ -1,20 +1,15 @@
-// map结构
 /**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 function twoSum(nums, target) {
-	const map = new Map(),
-		n = nums.length;
-
-	for (let i = 0; i < n; i++) {
-		const num = nums[i];
-		const index = map.get(target - num);
-		if (index === void 0) {
-			map.set(num, i);
-			continue;
-		}
-		return [index, i];
-	}
+  const hash = new Map();
+  for (let i = nums.length - 1; i >= 0; i--) {
+    const num = nums[i];
+    if (hash.has(target - num)) {
+      return [i, hash.get(target - num)];
+    }
+    hash.set(num, i);
+  }
 }
