@@ -4,8 +4,13 @@
  */
 
 function reverseString(s) {
-	let l = -1,
-		r = s.length;
+  let l = -1,
+    r = s.length,
+    temp;
 
-	while (++l < --r) [s[l], s[r]] = [s[r], s[l]];
+  while (++l < --r) {
+    temp = s[l];
+    s[l] = s[r];
+    s[r] = temp;
+  }
 }
