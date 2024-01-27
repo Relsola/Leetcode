@@ -3,16 +3,19 @@
  * @param {number} k
  * @return {string}
  */
-
 function reverseStr(s, k) {
-	const n = s.length,
-		arr = s.split("");
+  const n = s.length,
+    arr = s.split('');
+  let left, right, temp;
 
-	for (let i = 0; i < n; i += 2 * k) {
-		let l = i - 1,
-			r = i + k > n ? n : i + k;
-		while (++l < --r) [arr[l], arr[r]] = [arr[r], arr[l]];
-	}
-
-	return arr.join("");
+  for (let i = 0; i < n; i += 2 * k) {
+    left = i - 1;
+    right = Math.min(n, i + k);
+    while (++left < --right) {
+      temp = arr[left];
+      arr[left] = arr[right];
+      arr[right] = temp;
+    }
+  }
+  return arr.join('');
 }
